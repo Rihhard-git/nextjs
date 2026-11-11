@@ -15,31 +15,31 @@ export default function RegisterPage() {
         <div>
           <label>
             Username
-            <input type="text" name="username" required defaultValue={state.values?.username}/>
+            <input data-testid="username-error" name="username" required defaultValue={state.values?.username}/>
             {"username" in state.errors && <p style={{ color: "red" }}>{state.errors.username}</p>}
           </label>
         </div>
         <div>
           <label>
             Name
-            <input type="text" name="name" required defaultValue={state.values?.name}/>
+            <input data-testid="name-error" type="text" name="name" required defaultValue={state.values?.name}/>
           </label>
         </div>
         <div>
           <label>
             Password
-            <input type="password" name="password" required/>
+            <input data-testid="password-error" type="password" name="password" required/>
             {"password" in state.errors && <p style={{ color: "red" }}>{state.errors.password}</p>}
           </label>
         </div>
         <div>
           <label>
             Confirm Password
-            <input type="password" name="confirmPassword" required />
+            <input data-testid="passwordConfirm-error" type="password" name="confirmPassword" required />
             {"confirm" in state.errors && <p style={{ color: "red" }}>{state.errors.confirm}</p>}
           </label>
         </div>
-        <button type="submit">Register</button>
+        <button data-testid="register-button" type="submit">Register</button>
       </form>
     </div>
   )

@@ -36,6 +36,20 @@
       "when": 1781260086678,
       "tag": "0004_giant_sauron",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1781433841786,
+      "tag": "0005_sparkling_liz_osborn",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1794343864542,
+      "tag": "0006_exotic_lucky_pierre",
+      "breakpoints": true
     }
   ]
 }

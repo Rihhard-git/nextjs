@@ -23,18 +23,18 @@ const NewBlog = () => {
             <h2 className="text-2xl font-bold mb-4">Create a new Blog</h2>
             <form action={formAction} className="border rounded p-6">
                 <div>
-                    <label>Title</label>
-                    <input type="text" name="title" required className="border m-2 rounded"/>
+                    <label htmlFor="title">Title</label>
+                    <input type="text" id="title" name="Title" required className="border m-2 rounded"/>
                 </div>
                 <div>
-                    <label>Author</label>
-                    <input type="text" name="author" required className="border m-2 rounded"/>
+                    <label htmlFor="author">Author</label>
+                    <input type="text" id="author" name="Author" required className="border m-2 rounded"/>
                 </div>
                 <div>
-                    <label>Url</label>
-                    <input type="text" name="url" required className="border m-2 rounded"/>
+                    <label htmlFor="url">URL</label>
+                    <input type="text" id="url" name="URL" required className="border m-2 rounded"/>
                 </div>   
-                <button type="submit" className="bg-green-600 hover:bg-green-500 px-3 py-1 rounded">Create</button>
+                <button data-testid="create-blog-button" type="submit" className="bg-green-600 hover:bg-green-500 px-3 py-1 rounded">Create</button>
                 {state.error && <p style={{ color: "red" }}>{state.error}</p>}
             </form>
         </div>

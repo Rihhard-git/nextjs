@@ -23,16 +23,17 @@ const Blogs = async ({ searchParams, } : { searchParams: Promise<{ filter?: stri
             <h2 className="text-2xl font-bold mb-4">Blogs</h2>
 
                 <form action={searchBlog}>
-                <input type="text" name="search" className="border m-2 rounded" />
-                <button type="submit">search</button>
+                <input data-testid="filter-input" type="text" name="search" className="border m-2 rounded" />
+                <button data-testid="search-button" type="submit">search</button>
                 </form>
             
-            <ul className="space-y-2">
+            <ul data-testid="blogs-list" className="space-y-2">
                 {blogsToShow.map(b => (
                     <li key={b.id} className="border rounded p-3 hover:bg-gray-50">
                         <Link href={`/blogs/${b.id}`} className="text-blue-600 hover:underline" >
                         {b.title} 
                         </Link>
+                        <span data-testid="blog-likes" className="ml-2 text-gray-600">{b.likes} likes</span>
                     </li>
                 ))}        
             </ul>

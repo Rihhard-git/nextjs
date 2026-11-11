@@ -15,10 +15,19 @@ export const users = pgTable('users', {
     username: text('username').notNull().unique(),
     name: text('name').notNull(),
     passwordHash: text('password_hash').notNull().default(''),
+    token: text('token')
+})
+
+export const readingList = pgTable('reading_lists', {
+    id: serial('id').primaryKey(),
+    userId: integer('user_id').notNull().references(() => users.id),
+    blogId: integer('blog_id').notNull().references(() => blogs.id),
+    read: integer('read').notNull().default(0)
 })
 
 export const usersRelations = relations(users, ({ many }) => ({
-    blogs: many(blogs),
+    createdBlogs: many(blogs),
+    readingList: many(readingList),
 }))
 
 export const blogsRelations = relations(blogs, ({ one }) => ({
@@ -27,3 +36,14 @@ export const blogsRelations = relations(blogs, ({ one }) => ({
         references: [users.id]
     })
 }))
+
+export const readingListsRelations = relations(readingList, ({ one }) => ({
+    user: one(users, {
+        fields: [readingList.userId],
+        references: [users.id]
+    }),
+    blog: one(blogs, {
+        fields: [readingList.blogId],
+        references: [blogs.id]
+    })
+})) 

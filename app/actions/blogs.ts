@@ -1,7 +1,7 @@
 "use server"
 
 import { redirect } from "next/navigation"
-import { addBlog, addLike } from "../services/blogs"
+import { addBlog, addBlogToUsersReadingList, addLike, markAsRead } from "../services/blogs"
 import { revalidatePath } from "next/cache"
 import { auth } from "@/auth"
 
@@ -13,7 +13,7 @@ export const createBlog = async (
     if (!session) {
         redirect("/login")
     }
-    const title = formData.get("title") as string
+    const title = formData.get("Title") as string
 
     if (!title || title.length < 5) {
        return {
@@ -21,17 +21,17 @@ export const createBlog = async (
             success: false
        }
     }
-    const author = formData.get("author") as string
+    const author = formData.get("Author") as string
     if (!author || author.length < 5) {
         return {
             error: "Blog author must be at least 5 characters long.",
             success: false
        }
     }
-    const url = formData.get("url") as string
+    const url = formData.get("URL") as string
     if (!url || url.length < 5) {
         return {
-            error: "Blog author must be at least 5 characters long.",
+            error: "Blog URL must be at least 5 characters long.",
             success: false
        }
     }
@@ -52,4 +52,17 @@ export const likeABlog = async (formData: FormData) => {
 export const searchBlog = async (formData: FormData) => {
     const search = formData.get("search")
     redirect(`/blogs?filter=${search}`)
+}
+
+export const markBlogAsRead = async (formData: FormData) => {
+    const blogId = Number(formData.get("id"))
+    await markAsRead(blogId)
+    revalidatePath("/me")
+}
+
+export const addToReadingList = async (formData: FormData) => {
+    const blogId = Number(formData.get("blogId"))
+    const userId = Number(formData.get("userId"))
+    await addBlogToUsersReadingList(blogId, userId)
+    revalidatePath("/me")
 }
