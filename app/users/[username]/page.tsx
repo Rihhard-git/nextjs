@@ -14,7 +14,7 @@ const UserPage = async ({ params }: { params: Promise<{ username: string }> }) =
             <h2>{user.name}</h2>
             <h3>Blogs</h3>
             <ul>
-                {user.blogs.map(b => (
+                {user.createdBlogs.map(b => (
                     <li key={b.id}>
                         <Link href={`/blogs/${b.id}`}>{b.title}</Link>
                     </li>
